@@ -56,6 +56,8 @@ public class LocationScene {
     private boolean debugEnabled = false;
     private Session mSession;
     private DeviceLocationChanged locationChangedEvent;
+    private double markerHeight;
+    private double deviceHeight;
 
     public LocationScene(Activity context, ArSceneView mArSceneView) {
         this.context = context;
@@ -95,7 +97,20 @@ public class LocationScene {
     public void setMinimalRefreshing(boolean minimalRefreshing) {
         this.minimalRefreshing = minimalRefreshing;
     }
+    public double getMarkerHeight() {
+        return markerHeight;
+    }
 
+    public void getMarkerHeight(double markerHeight) {
+        this.markerHeight = markerHeight;
+    }
+    public double getDeviceHeight() {
+        return deviceHeight;
+    }
+
+    public void setDeviceHeight(double deviceHeight) {
+        this.deviceHeight = deviceHeight;
+    }
     public boolean refreshAnchorsAsLocationChanges() {
         return refreshAnchorsAsLocationChanges;
     }
@@ -242,8 +257,9 @@ public class LocationScene {
                                 deviceLocation.currentBestLocation.getLatitude(),
                                 marker.longitude,
                                 deviceLocation.currentBestLocation.getLongitude(),
-                                0,
-                                0)
+                                markerHeight,
+                                deviceHeight
+                                )
                 );
 
                 if (markerDistance > marker.getOnlyRenderWhenWithin()) {
